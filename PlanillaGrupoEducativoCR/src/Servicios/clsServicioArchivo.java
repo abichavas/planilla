@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.clsEmpleado;
+import modelo.clsPlanilla;
 import modelo.clsPuesto;
 import modelo.clsUsuario;
 
@@ -28,6 +29,7 @@ public class clsServicioArchivo {
     private static final String URLEmpleados = "src\\archivos\\bdEmpleados.dat";
     private static final String URLPuestos = "src\\archivos\\bdPuestos.dat";
     private static final String URLUsuario = "src\\archivos\\bdUsuarios.dat";
+    private static final String URLPlanillas = "src\\archivos\\bdPlanillas.dat";
 
     public static File validarArchivo(String URL) {
         File bd = new File(URL);
@@ -196,6 +198,58 @@ public class clsServicioArchivo {
             JOptionPane.showMessageDialog(null, "Error, No Existe el archivo");
         } catch (IOException ex) {
             Logger.getLogger(clsUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error No se puede acceder el archivo");
+        }
+    }
+    
+    public ArrayList<clsPlanilla> obtenerPlanillas() {
+        File bd = validarArchivo(URLPlanillas);
+        ArrayList<clsPlanilla> planillas = new ArrayList<clsPlanilla>();
+        ObjectInputStream objetoEntrada = null;
+
+        try {
+
+            FileInputStream ficheroEntrada = new FileInputStream(bd);
+            if (ficheroEntrada.available() > 0) {
+                objetoEntrada = new ObjectInputStream(ficheroEntrada);
+
+                planillas = (ArrayList<clsPlanilla>) objetoEntrada.readObject();
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(clsPlanilla.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error, No Existe el archivo");
+        } catch (IOException ex) {
+            Logger.getLogger(clsPlanilla.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error No se puede acceder el archivo");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(clsPlanilla.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (objetoEntrada != null) {
+                    objetoEntrada.close();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(clsPlanilla.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return planillas;
+    }
+
+    public void guardarPlanillas(ArrayList<clsPlanilla> planillas) {
+        File bd = validarArchivo(URLPlanillas);
+        try {
+            FileOutputStream ficheroSalida = new FileOutputStream(bd, false);
+            ObjectOutputStream objetoSalida = new ObjectOutputStream(ficheroSalida);
+            objetoSalida.writeObject(planillas);
+            objetoSalida.close();
+         
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(clsPlanilla.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error, No Existe el archivo");
+        } catch (IOException ex) {
+            Logger.getLogger(clsPlanilla.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error No se puede acceder el archivo");
         }
     }

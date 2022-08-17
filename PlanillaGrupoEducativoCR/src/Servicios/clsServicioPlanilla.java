@@ -15,21 +15,32 @@ import modelo.clsPrestamo;
  */
 public class clsServicioPlanilla {
 
-    public ArrayList<clsPlanilla> calcularPlanilla(ArrayList<clsEmpleado> empleados, clsServicioArchivo archivo) {
-        
-        ArrayList<clsPlanilla> planilla = new ArrayList<>();
-        for (int i = 0; i < empleados.size(); i++) {
-            clsEmpleado empleado = empleados.get(i);
-            clsPlanilla planillaPersonal = new clsPlanilla(empleado);
-            //actualizando la cantidad de cuotas pendientes para cada prestamo del empleado
-            ArrayList<clsPrestamo> prestamos = empleado.getPrestamos();
-            for (int j = 0; j < prestamos.size(); j++) {
-                clsPrestamo prestamo = prestamos.get(j);
-                prestamo.setCantidadCuotasPendientes(prestamo.getCantidadCuotasPendientes() - 1);
+    private clsServicioArchivo archivo;
+    private ArrayList<clsPlanilla> planillas;
+    private clsServicioEmpleado servicioEmpleado;
+
+    public clsServicioPlanilla(clsServicioArchivo archivo, clsServicioEmpleado servicioEmpleado) {
+        this.archivo = archivo;
+        this.servicioEmpleado = servicioEmpleado;
+        this.planillas = archivo.obtenerPlanillas();
+    }
+
+    public ArrayList<clsPlanilla> getPlanillas() {
+        return planillas;
+    }
+
+    public clsPlanilla crear(String anno, String mes) throws Exception {
+        for (clsPlanilla planilla : planillas) {
+            if(planilla.getAnno().equals(anno) && planilla.getMes().equals(mes)){
+                throw new Exception("No se puede generar dos veces la misma planilla");
             }
-            planilla.add(planillaPersonal);
         }
+        ArrayList<clsEmpleado> empleados = this.servicioEmpleado.getEmpleados();
+        clsPlanilla planilla = new clsPlanilla(mes, anno, empleados);
+        planillas.add(planilla);
+        // guarda empleados para guardar los pagos de los prestamos
         archivo.guardarEmpleados(empleados);
+        archivo.guardarPlanillas(this.planillas);
         return planilla;
     }
 }

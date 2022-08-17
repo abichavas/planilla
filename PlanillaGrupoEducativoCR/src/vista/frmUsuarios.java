@@ -40,9 +40,7 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
     private void cargarTabla() {
 
         DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
-
         model.setRowCount(0);
-
         for (clsUsuario p : this.servicioUsuario.getUsuarios()) {
 
             model.addRow(new Object[]{p.getUsuario(),

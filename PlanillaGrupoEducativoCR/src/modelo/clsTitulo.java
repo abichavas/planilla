@@ -11,14 +11,15 @@ import java.io.Serializable;
  * @author Abigail
  */
 public class clsTitulo implements Serializable {
+
     private TipoTitulo tipo;
     private int horas;
     private String nombre;
 
-    public clsTitulo(TipoTitulo tipo, int horas,String nombre) {
+    public clsTitulo(TipoTitulo tipo, int horas, String nombre) {
         this.tipo = tipo;
         this.horas = horas;
-        this.nombre= nombre;
+        this.nombre = nombre;
     }
 
     public String getNombre() {
@@ -27,13 +28,6 @@ public class clsTitulo implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    public int getPuntos(){
-        if(tipo==TipoTitulo.Aprovechamiento){
-            return (int)Math.floor (horas/40);
-        }else{
-        return (int)Math.floor (horas/80);
-    }
     }
 
     public TipoTitulo getTipo() {

@@ -26,7 +26,6 @@ public class MDI extends javax.swing.JFrame {
     private clsServicioArchivo archivo;
     private clsServicioEmpleado servicioEmpleado;
     private clsServicioPuesto servicioPuesto;
-    private clsCarreraProfesional carreraProfesional;
     private clsServicioPlanilla servicioPlanilla;
 
     /**
@@ -41,6 +40,7 @@ public class MDI extends javax.swing.JFrame {
         this.servicioUsuario = new clsServicioUsuario(this.archivo);
         this.servicioPuesto= new clsServicioPuesto(archivo);
         this.servicioEmpleado= new clsServicioEmpleado(archivo);
+        this.servicioPlanilla = new clsServicioPlanilla(archivo, servicioEmpleado);
         this.validarRol();
         
     }
@@ -63,9 +63,11 @@ public class MDI extends javax.swing.JFrame {
         menu = new javax.swing.JMenu();
         mniUsuarios = new javax.swing.JMenuItem();
         mniEmpleados = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mniPuestos = new javax.swing.JMenuItem();
         mniCarreras = new javax.swing.JMenuItem();
         mniPlanillas = new javax.swing.JMenuItem();
+        mniSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1080, 720));
@@ -83,13 +85,11 @@ public class MDI extends javax.swing.JFrame {
 
         getContentPane().add(jDesktopPane2, java.awt.BorderLayout.CENTER);
 
-        menu.setForeground(new java.awt.Color(0, 0, 0));
         menu.setText("Menu");
         menu.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         mniUsuarios.setBackground(new java.awt.Color(170, 212, 255));
         mniUsuarios.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        mniUsuarios.setForeground(new java.awt.Color(0, 0, 0));
         mniUsuarios.setText("Usuarios");
         mniUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +100,6 @@ public class MDI extends javax.swing.JFrame {
 
         mniEmpleados.setBackground(new java.awt.Color(170, 212, 255));
         mniEmpleados.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        mniEmpleados.setForeground(new java.awt.Color(0, 0, 0));
         mniEmpleados.setText("Empleados");
         mniEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,9 +108,17 @@ public class MDI extends javax.swing.JFrame {
         });
         menu.add(mniEmpleados);
 
+        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem1.setText("Prestamos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menu.add(jMenuItem1);
+
         mniPuestos.setBackground(new java.awt.Color(170, 212, 255));
         mniPuestos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        mniPuestos.setForeground(new java.awt.Color(0, 0, 0));
         mniPuestos.setText("Puestos");
         mniPuestos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +128,6 @@ public class MDI extends javax.swing.JFrame {
         menu.add(mniPuestos);
 
         mniCarreras.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        mniCarreras.setForeground(new java.awt.Color(0, 0, 0));
         mniCarreras.setText("Carreras Profesionales");
         mniCarreras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +138,6 @@ public class MDI extends javax.swing.JFrame {
 
         mniPlanillas.setBackground(new java.awt.Color(170, 212, 255));
         mniPlanillas.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        mniPlanillas.setForeground(new java.awt.Color(0, 0, 0));
         mniPlanillas.setText("Planillas");
         mniPlanillas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +145,15 @@ public class MDI extends javax.swing.JFrame {
             }
         });
         menu.add(mniPlanillas);
+
+        mniSalir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mniSalir.setText("Salir");
+        mniSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSalirActionPerformed(evt);
+            }
+        });
+        menu.add(mniSalir);
 
         jMenuBar1.add(menu);
 
@@ -156,7 +170,7 @@ public class MDI extends javax.swing.JFrame {
     }//GEN-LAST:event_mniPlanillasActionPerformed
 
     private void mniCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCarrerasActionPerformed
-        frmCarreraProfesional vFrame = new frmCarreraProfesional(carreraProfesional);
+        frmCarreraProfesional vFrame = new frmCarreraProfesional(this.servicioEmpleado);
         vFrame.setSize(1850, 1000);
         jDesktopPane2.add(vFrame);
         vFrame.setVisible(true);
@@ -183,16 +197,29 @@ public class MDI extends javax.swing.JFrame {
         jDesktopPane2.add(vFrame);
         vFrame.setVisible(true);
     }//GEN-LAST:event_mniUsuariosActionPerformed
+
+    private void mniSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mniSalirActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        frmPrestamos vFrame = new frmPrestamos(servicioEmpleado);
+        vFrame.setSize(1850, 1000);
+        jDesktopPane2.add(vFrame);
+        vFrame.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
                                           
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menu;
     private javax.swing.JMenuItem mniCarreras;
     private javax.swing.JMenuItem mniEmpleados;
     private javax.swing.JMenuItem mniPlanillas;
     private javax.swing.JMenuItem mniPuestos;
+    private javax.swing.JMenuItem mniSalir;
     private javax.swing.JMenuItem mniUsuarios;
     // End of variables declaration//GEN-END:variables
 }

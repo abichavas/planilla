@@ -11,43 +11,38 @@ import java.io.Serializable;
  * @author Abigail
  */
 public class clsPrestamo implements Serializable {
-    private int cuota;
-    int cantidadCuotas;
-    int cantidadCuotasPendientes;
-    
-    
-   public clsPrestamo(int cuota, int cantidadCuotas) {
+
+    private double cuota;
+    private double cantidadCuotas;
+    private double cantidadCuotasPendientes;
+
+    public clsPrestamo(double cuota, double cantidadCuotas, double pendientes) {
         this.cuota = cuota;
         this.cantidadCuotas = cantidadCuotas;
-        this.cantidadCuotasPendientes=this.cantidadCuotas;
+        this.cantidadCuotasPendientes = pendientes;
     }
-    public int getCantidadCuotasPendientes() {
+
+    public double getCantidadCuotasPendientes() {
         return cantidadCuotasPendientes;
     }
 
-    public void setCantidadCuotasPendientes(int cantidadCuotasPendientes) {
+    public void setCantidadCuotasPendientes(double cantidadCuotasPendientes) {
         this.cantidadCuotasPendientes = cantidadCuotasPendientes;
     }
 
-    
-
-    public int getCantidadCuotas() {
+    public double getCantidadCuotas() {
         return cantidadCuotas;
     }
 
-    public void setCantidadCuotas(int cantidadCuotas) {
+    public void setCantidadCuotas(double cantidadCuotas) {
         this.cantidadCuotas = cantidadCuotas;
     }
 
-    public int getCuota() {
-        if(cantidadCuotas>0){
-            return cuota;
-        }else{
-        return 0;
-        }
+    public double getCuota() {
+        return cuota;
     }
 
-    public void setCuota(int cuota) {
+    public void setCuota(double cuota) {
         this.cuota = cuota;
     }
 }

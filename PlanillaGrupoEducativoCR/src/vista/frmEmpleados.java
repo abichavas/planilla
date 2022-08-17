@@ -5,21 +5,14 @@
 package vista;
 
 import Servicios.clsServicioEmpleado;
-import Servicios.clsServicioEmpleado;
 import Servicios.clsServicioPuesto;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import modelo.Grado;
-import modelo.clsCarreraProfesional;
 import modelo.clsEmpleado;
 import modelo.clsPrestamo;
 import modelo.clsPuesto;
-import modelo.clsUsuario;
 import modelo.Grado;
 
 /**
@@ -62,9 +55,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     private void cargarTabla() {
 
         DefaultTableModel model = (DefaultTableModel) tblDatosEmpleado.getModel();
-
         model.setRowCount(0);
-
         for (clsEmpleado p : this.servicioEmpleado.getEmpleados()) {
 
             model.addRow(new Object[]{p.getNombre(),
@@ -108,55 +99,43 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empleados Grupo Educativo CR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empleados Grupo Educativo CR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nombre");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Apellidos");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Edad");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Cédula");
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Grado");
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Puesto");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Pensiones");
 
         txtNombre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
 
         txtApellido.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtApellido.setForeground(new java.awt.Color(0, 0, 0));
 
         txtEdad.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtEdad.setForeground(new java.awt.Color(0, 0, 0));
 
         txtCedula.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtCedula.setForeground(new java.awt.Color(0, 0, 0));
 
         txtPensiones.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtPensiones.setForeground(new java.awt.Color(0, 0, 0));
+        txtPensiones.setText("0");
 
         cbGrado.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cbGrado.setForeground(new java.awt.Color(0, 0, 0));
         cbGrado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbGrado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +144,6 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         });
 
         cbPuesto.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cbPuesto.setForeground(new java.awt.Color(0, 0, 0));
         cbPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -228,7 +206,6 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         );
 
         tblDatosEmpleado.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        tblDatosEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         tblDatosEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -239,7 +216,15 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
             new String [] {
                 "Nombre", "Apellidos", "Edad", "Cédula", "Grado", "Puesto", "Pensiones"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDatosEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDatosEmpleadoMouseClicked(evt);
@@ -249,7 +234,6 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
 
         btnCrear.setBackground(new java.awt.Color(183, 218, 253));
         btnCrear.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnCrear.setForeground(new java.awt.Color(0, 0, 0));
         btnCrear.setText("Crear");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +243,6 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
 
         btnEliminar.setBackground(new java.awt.Color(180, 212, 245));
         btnEliminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(0, 0, 0));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,16 +262,16 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addGap(22, 22, 22)
                         .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEditar)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,7 +333,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         try {
             this.empleadoSeleccionado.setPuesto(puesto);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error: "+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error", ex.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
         this.empleadoSeleccionado.setCantidadPensiones(Integer.parseInt(txtPensiones.getText()));
         this.empleadoSeleccionado.setGrado(grado);
@@ -385,17 +368,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         txtApellido.setText(empleadoSeleccionado.getApellido());
         txtEdad.setText(String.valueOf(empleadoSeleccionado.getEdad()));
         txtCedula.setText(empleadoSeleccionado.getCedula());
-        switch (empleadoSeleccionado.getGrado()) {
-            case Primario:
-                cbGrado.setSelectedIndex(0);
-                break;
-            case Secundario:
-                cbGrado.setSelectedIndex(1);
-                break;
-            default:
-                cbGrado.setSelectedIndex(2);
-                break;
-        }
+        cbGrado.setSelectedItem(empleadoSeleccionado.getGrado().toString());
         for (int i = 0; i < servicioPuesto.getPuestos().size(); i++) {
             clsPuesto puesto = servicioPuesto.getPuestos().get(i);
             if (puesto.getNombre().equals(empleadoSeleccionado.getPuesto().getNombre())) {

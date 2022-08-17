@@ -11,5 +11,5 @@ import java.io.Serializable;
  * @author Abigail
  */
 public enum TipoTitulo implements Serializable {
-    Aprovechamiento, Participación;
+    Aprovechamiento, Participacion;
 }

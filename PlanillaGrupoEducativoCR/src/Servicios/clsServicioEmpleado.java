@@ -27,17 +27,6 @@ public class clsServicioEmpleado {
         this.empleados = this.archivo.obtenerEmpleados();
     }
 
-    public void agregarTitulo(clsEmpleado empleado, TipoTitulo tipo, int horas, String nombre) {
-        empleado.getCarreraProfesional().getTitulos().add(new clsTitulo(tipo, horas, nombre));
-        guardarEmpleados();
-    }
-
-    public boolean eliminarTitulo(clsEmpleado empleado, clsTitulo titulo) {
-        boolean eliminado = empleado.getCarreraProfesional().getTitulos().remove(titulo);
-        guardarEmpleados();
-        return eliminado;
-    }
-
     public clsEmpleado crear(String nombre, String apellido, String cedula, int edad, clsPuesto puesto,
      int cantidadPensiones, Grado grado) {
         clsEmpleado empleado = new clsEmpleado(nombre, apellido, cedula, edad, puesto, cantidadPensiones, grado);
@@ -58,6 +47,28 @@ public class clsServicioEmpleado {
 
     public ArrayList<clsEmpleado> getEmpleados() {
         return empleados;
+    }
+    
+     public void agregarTitulo(clsEmpleado empleado, TipoTitulo tipo, int horas, String nombre) {
+        empleado.getCarreraProfesional().getTitulos().add(new clsTitulo(tipo, horas, nombre));
+        guardarEmpleados();
+    }
+
+    public boolean eliminarTitulo(clsEmpleado empleado, clsTitulo titulo) {
+        boolean eliminado = empleado.getCarreraProfesional().getTitulos().remove(titulo);
+        guardarEmpleados();
+        return eliminado;
+    }
+    
+     public void agregarPrestamo(clsEmpleado empleado, double couta, double cantidateCuotas, double pendientes) {
+        empleado.getPrestamos().add(new clsPrestamo(couta, cantidateCuotas, pendientes));
+        guardarEmpleados();
+    }
+
+    public boolean eliminarPrestamo(clsEmpleado empleado, clsPrestamo prestamo) {
+        boolean eliminado = empleado.getPrestamos().remove(prestamo);
+        guardarEmpleados();
+        return eliminado;
     }
 
 }
