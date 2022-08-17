@@ -41,7 +41,7 @@ public class MDI extends javax.swing.JFrame {
         this.servicioUsuario = new clsServicioUsuario(this.archivo);
         this.servicioPuesto= new clsServicioPuesto(archivo);
         this.servicioEmpleado= new clsServicioEmpleado(archivo);
-        
+        this.validarRol();
         
     }
     private void validarRol(){
