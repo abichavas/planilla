@@ -8,7 +8,10 @@ import Servicios.clsServicioEmpleado;
 import Servicios.clsServicioEmpleado;
 import Servicios.clsServicioPuesto;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import modelo.Grado;
@@ -29,6 +32,7 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     private clsPrestamo prestamos;
     private clsServicioPuesto servicioPuesto;
     private clsEmpleado empleadoSeleccionado;
+    private int indice = -1;
 
     /**
      * Creates new form frmEmpleadoCRUD
@@ -329,13 +333,30 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        TableModel model = tblDatosEmpleado.getModel();
 
-        empleadoSeleccionado.setNombre((model.getValueAt());
-        usuario.setPassword((String) model.getValueAt(i, 1));
+        clsPuesto puesto = servicioPuesto.getPuestos().get(cbPuesto.getSelectedIndex());
+        Grado grado = Grado.Primario;
+        if (cbGrado.getSelectedIndex() == 1) {
+            grado = Grado.Secundario;
+        } else if (cbGrado.getSelectedIndex() == 2) {
+            grado = Grado.Universitario;
+        }
+        this.empleadoSeleccionado.setNombre(txtNombre.getText());
+        this.empleadoSeleccionado.setApellido(txtApellido.getText());
+        this.empleadoSeleccionado.setCedula(txtCedula.getText());
+        this.empleadoSeleccionado.setEdad(Integer.parseInt(txtEdad.getText()));
+        try {
+            this.empleadoSeleccionado.setPuesto(puesto);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error: "+ ex.getMessage());
+        }
+        this.empleadoSeleccionado.setCantidadPensiones(Integer.parseInt(txtPensiones.getText()));
+        this.empleadoSeleccionado.setGrado(grado);
 
-        servicioUsuario.guardarUsuarios();
+        this.servicioEmpleado.guardarEmpleados();
+        this.cargarTabla();
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -357,18 +378,23 @@ public class frmEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void tblDatosEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosEmpleadoMouseClicked
-        this.empleadoSeleccionado = servicioEmpleado.getEmpleados().get(tblDatosEmpleado.getSelectedRow());
+        this.indice = tblDatosEmpleado.getSelectedRow();
+        this.empleadoSeleccionado = servicioEmpleado.getEmpleados().get(this.indice);
 
         txtNombre.setText(empleadoSeleccionado.getNombre());
         txtApellido.setText(empleadoSeleccionado.getApellido());
         txtEdad.setText(String.valueOf(empleadoSeleccionado.getEdad()));
         txtCedula.setText(empleadoSeleccionado.getCedula());
-        if (empleadoSeleccionado.getGrado() == Grado.Primario) {
-            cbGrado.setSelectedIndex(0);
-        } else if (empleadoSeleccionado.getGrado() == Grado.Secundario) {
-            cbGrado.setSelectedIndex(1);
-        } else {
-            cbGrado.setSelectedIndex(2);
+        switch (empleadoSeleccionado.getGrado()) {
+            case Primario:
+                cbGrado.setSelectedIndex(0);
+                break;
+            case Secundario:
+                cbGrado.setSelectedIndex(1);
+                break;
+            default:
+                cbGrado.setSelectedIndex(2);
+                break;
         }
         for (int i = 0; i < servicioPuesto.getPuestos().size(); i++) {
             clsPuesto puesto = servicioPuesto.getPuestos().get(i);
